@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Vote Chor, Gaddi Chhod. | modaniregime.com</title>
   <meta name="description" content="Political satire. Vote Chor, Gaddi Chhod. Nothing here should be taken literally.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,17 +15,21 @@
       --paper: #e8dfd0;
       --gold: #d4a017;
       --blood: #b91c1c;
-      --smoke: rgba(26, 20, 16, 0.55);
+      --smoke: rgba(26, 20, 16, 0.72);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --header-h: auto;
+      --chrome: 0px;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
 
-    html {
+    html, body {
+      margin: 0;
       height: 100%;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
@@ -36,28 +40,28 @@
         radial-gradient(ellipse 80% 50% at 15% 20%, rgba(185, 28, 28, 0.14), transparent 55%),
         radial-gradient(ellipse 70% 45% at 90% 75%, rgba(212, 160, 23, 0.1), transparent 50%),
         linear-gradient(165deg, #2a221c 0%, #1a1410 45%, #0f0c0a 100%);
-      background-attachment: fixed;
     }
 
     .stage {
       flex: 1 1 auto;
       display: flex;
       flex-direction: column;
-      min-height: 0;
       width: 100%;
+      min-height: 0;
+      min-height: 100dvh;
+      min-height: 100svh;
     }
 
     header {
       flex: 0 0 auto;
-      padding: clamp(1rem, 3vw, 1.75rem) clamp(1rem, 4vw, 2.5rem) 0;
+      padding: calc(0.65rem + var(--safe-top)) 0.85rem 0.4rem;
       text-align: center;
-      animation: rise 0.9s ease-out both;
     }
 
     .headline {
       margin: 0;
       font-family: "Archivo Black", Impact, sans-serif;
-      font-size: clamp(1.6rem, 6.5vw, 4.25rem);
+      font-size: clamp(1.35rem, 7.2vw, 2.4rem);
       font-weight: 400;
       letter-spacing: -0.02em;
       line-height: 1.05;
@@ -70,9 +74,9 @@
     }
 
     .site-mark {
-      margin: 0.55rem 0 0;
+      margin: 0.35rem 0 0;
       font-family: "Archivo Black", Impact, sans-serif;
-      font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+      font-size: 0.65rem;
       font-weight: 400;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -80,50 +84,57 @@
     }
 
     .hero {
-      position: relative;
       flex: 1 1 auto;
       width: 100%;
       min-height: 0;
-      margin-top: clamp(0.75rem, 2vw, 1.25rem);
-      animation: fade-scale 1.1s ease-out 0.15s both;
+      /* Fill almost the whole phone screen after compact chrome */
+      min-height: calc(100dvh - 9.5rem - var(--safe-top) - var(--safe-bottom));
+      min-height: calc(100svh - 9.5rem - var(--safe-top) - var(--safe-bottom));
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      background: #0a0807;
     }
 
     .hero img {
-      position: absolute;
-      inset: 0;
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center;
+      object-fit: cover;
+      object-position: center center;
     }
 
     .cta-bar {
       flex: 0 0 auto;
       display: flex;
       justify-content: center;
-      padding: clamp(0.85rem, 2.5vw, 1.35rem) 1rem;
-      animation: rise 0.9s ease-out 0.35s both;
+      padding: 0.65rem 0.85rem;
     }
 
     a.video-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.65rem;
-      padding: 0.9rem 1.6rem;
+      justify-content: center;
+      gap: 0.55rem;
+      width: min(100%, 22rem);
+      padding: 0.85rem 1.25rem;
       background: var(--blood);
       color: #fff;
       text-decoration: none;
       font-family: "Archivo Black", Impact, sans-serif;
-      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      font-size: 1rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
       transition: transform 0.2s ease, background 0.2s ease;
     }
 
     a.video-link:hover {
       background: #951515;
-      transform: translateY(-2px);
+    }
+
+    a.video-link:active {
+      transform: scale(0.98);
     }
 
     a.video-link:focus-visible {
@@ -138,58 +149,104 @@
     footer {
       flex: 0 0 auto;
       width: 100%;
-      padding: 1rem clamp(1rem, 4vw, 2.5rem) 1.35rem;
+      padding: 0.75rem 0.85rem calc(0.9rem + var(--safe-bottom));
       border-top: 1px solid rgba(196, 184, 168, 0.25);
       text-align: center;
-      font-size: clamp(0.75rem, 2vw, 0.875rem);
-      line-height: 1.6;
+      font-size: 0.72rem;
+      line-height: 1.5;
       color: var(--dust);
       background: var(--smoke);
-      animation: rise 0.9s ease-out 0.4s both;
     }
 
     footer strong {
       display: block;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
       font-family: "Archivo Black", Impact, sans-serif;
-      font-size: 0.72rem;
+      font-size: 0.65rem;
       font-weight: 400;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--paper);
     }
 
-    @keyframes rise {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
+    /* Tablets & landscape phones: show full image without heavy crop */
+    @media (min-width: 640px), (orientation: landscape) and (min-height: 420px) {
+      header {
+        padding: clamp(0.85rem, 2vw, 1.5rem) clamp(1rem, 4vw, 2.5rem) 0.5rem;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      .headline {
+        font-size: clamp(1.75rem, 5.5vw, 4rem);
+      }
+
+      .site-mark {
+        font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+        margin-top: 0.5rem;
+      }
+
+      .hero {
+        min-height: 0;
+        flex: 1 1 auto;
+      }
+
+      .hero img {
+        object-fit: contain;
+        object-position: center;
+      }
+
+      .cta-bar {
+        padding: clamp(0.75rem, 2vw, 1.25rem) 1rem;
+      }
+
+      a.video-link {
+        width: auto;
+        padding: 0.9rem 1.6rem;
+        font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      }
+
+      a.video-link:hover {
+        transform: translateY(-2px);
+      }
+
+      footer {
+        padding: 1rem clamp(1rem, 4vw, 2.5rem) calc(1.25rem + var(--safe-bottom));
+        font-size: clamp(0.75rem, 2vw, 0.875rem);
+      }
+
+      footer strong {
+        font-size: 0.72rem;
+        margin-bottom: 0.3rem;
       }
     }
 
-    @keyframes fade-scale {
-      from {
-        opacity: 0;
-        transform: scale(0.985);
+    /* Large desktops: image fills remaining viewport */
+    @media (min-width: 960px) {
+      .stage {
+        height: 100dvh;
+        max-height: 100dvh;
       }
-      to {
-        opacity: 1;
-        transform: scale(1);
+
+      .hero {
+        position: relative;
+        min-height: 0;
+      }
+
+      .hero img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      header,
-      .hero,
-      .cta-bar,
-      footer {
-        animation: none;
+      a.video-link {
+        transition: none;
       }
 
-      a.video-link:hover {
+      a.video-link:hover,
+      a.video-link:active {
         transform: none;
       }
     }
@@ -204,10 +261,12 @@
 
     <div class="hero">
       <img
-        src="vote-chor-13cr-hq.webp?v=1"
+        src="assets/vote-chor-13cr-hq.webp?v=3"
         alt="Political satire: Vote Chor, Gaddi Chhod — election theft illustration"
         width="1280"
         height="720"
+        decoding="async"
+        fetchpriority="high"
       >
     </div>
 
@@ -219,11 +278,11 @@
         The Prophesy
       </a>
     </div>
-  </div>
 
-  <footer>
-    <strong>Disclaimer</strong>
-    This site is political satire. Nothing on this page — including the image, video, or any implied message — should be taken literally or as factual reporting.
-  </footer>
+    <footer>
+      <strong>Disclaimer</strong>
+      This site is political satire. Nothing on this page — including the image, video, or any implied message — should be taken literally or as factual reporting.
+    </footer>
+  </div>
 </body>
 </html>
